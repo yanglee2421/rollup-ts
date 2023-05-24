@@ -1,8 +1,10 @@
 import { defineConfig } from "rollup";
-import tsPlugin from "@rollup/plugin-typescript";
+
+// Rollup plugins
 import nodePlugin from "@rollup/plugin-node-resolve";
-import cjsPlugin from "@rollup/plugin-commonjs";
 import jsonPlugin from "@rollup/plugin-json";
+import cjsPlugin from "@rollup/plugin-commonjs";
+import tsPlugin from "@rollup/plugin-typescript";
 import aliasPlugin from "@rollup/plugin-alias";
 
 // NodeJs
@@ -20,9 +22,9 @@ export default defineConfig({
   },
   plugins: [
     nodePlugin(),
+    jsonPlugin(),
     cjsPlugin(),
     tsPlugin(),
-    jsonPlugin(),
     aliasPlugin({
       entries: {
         "@": resolve(__dirname, "./src"),
