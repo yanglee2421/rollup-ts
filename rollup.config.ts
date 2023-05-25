@@ -1,11 +1,9 @@
 import { defineConfig } from "rollup";
 
 // Rollup plugins
-import nodePlugin from "@rollup/plugin-node-resolve";
-import jsonPlugin from "@rollup/plugin-json";
-import cjsPlugin from "@rollup/plugin-commonjs";
-import tsPlugin from "@rollup/plugin-typescript";
-import aliasPlugin from "@rollup/plugin-alias";
+import node from "@rollup/plugin-node-resolve";
+import babel from "@rollup/plugin-babel";
+import alias from "@rollup/plugin-alias";
 
 // NodeJs
 import { dirname, resolve } from "node:path";
@@ -15,21 +13,25 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   input: ["./src/main.ts"],
-  output: {
-    format: "esm",
-    dir: "dist",
-    compact: true,
-  },
+  output: [
+    {
+      format: "esm",
+      dir: "dist",
+      compact: true,
+    },
+  ],
+  external: [/node_modules/],
   plugins: [
-    nodePlugin(),
-    jsonPlugin(),
-    cjsPlugin(),
-    tsPlugin(),
-    aliasPlugin({
+    node({ extensions: [".js", ".ts"] }),
+    babel({
+      presets: ["@babel/preset-env", "@babel/preset-typescript"],
+      exclude: "node_modules/**",
+      extensions: [".js", ".ts"],
+    }),
+    alias({
       entries: {
         "@": resolve(__dirname, "./src"),
       },
     }),
   ],
-  external: [/node_modules/],
 });
