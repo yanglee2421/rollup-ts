@@ -27,6 +27,9 @@ export default defineConfig({
       presets: ["@babel/preset-env", "@babel/preset-typescript"],
       exclude: "node_modules/**",
       extensions: [".js", ".ts"],
+      targets: {
+        node: "current",
+      },
     }),
     alias({
       entries: {
