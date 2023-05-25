@@ -13,13 +13,6 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   input: [resolve(__dirname, "../src/main.ts")],
-  output: [
-    {
-      format: "esm",
-      dir: "dist",
-      compact: true,
-    },
-  ],
   external: [/node_modules/],
   plugins: [
     node({ extensions: [".js", ".ts"] }),
