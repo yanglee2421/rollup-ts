@@ -5,6 +5,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
+    "dev": "nodemon --exec tsx src/main.ts",
     "build": "rollup --config rollup.config.ts --configPlugin typescript"
   },
   "devDependencies": {
@@ -17,8 +18,10 @@
     "@rollup/plugin-typescript": "^11.1.1",
     "@types/express": "^4.17.17",
     "@types/node": "^20.2.3",
+    "nodemon": "^2.0.22",
     "rollup": "^3.23.0",
     "tslib": "^2.5.2",
+    "tsx": "^3.12.7",
     "typescript": "^5.0.4"
   },
   "dependencies": {

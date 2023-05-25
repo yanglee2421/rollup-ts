@@ -1,9 +1,12 @@
 import axios, { AxiosError } from "axios";
 
-export const request = axios.create({});
+export const request = axios.create({
+  baseURL: "",
+  timeout: 1000 * 60,
+});
 
-axios.interceptors.request.use((config) => config);
-axios.interceptors.response.use(
+request.interceptors.request.use((config) => config);
+request.interceptors.response.use(
   (res) => {
     const { data } = res;
     return data;
