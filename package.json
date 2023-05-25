@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon --exec tsx src/main.ts",
-    "build": "rollup -c",
+    "build": "tsx scripts/build",
     "serve": "node dist/main.js"
   },
   "devDependencies": {

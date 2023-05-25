@@ -1,4 +1,3 @@
-// @ts-check
 import { defineConfig } from "rollup";
 
 // Rollup plugins
@@ -13,7 +12,7 @@ import { fileURLToPath } from "node:url";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-  input: ["./src/main.ts"],
+  input: [resolve(__dirname, "../src/main.ts")],
   output: [
     {
       format: "esm",
@@ -34,7 +33,7 @@ export default defineConfig({
     }),
     alias({
       entries: {
-        "@": resolve(__dirname, "./src"),
+        "@": resolve(__dirname, "../src"),
       },
     }),
   ],
