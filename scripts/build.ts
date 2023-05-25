@@ -3,11 +3,11 @@ import rollupOps from "./rollup.config";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
 build();
 
 async function build() {
+  const __dirname = dirname(fileURLToPath(import.meta.url));
+
   try {
     const rollupBuild = await rollup(rollupOps);
     const rollupOutput = await rollupBuild.write({
