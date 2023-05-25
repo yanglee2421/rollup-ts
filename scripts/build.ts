@@ -10,10 +10,16 @@ async function build() {
 
   try {
     const rollupBuild = await rollup(rollupOps);
-    const rollupOutput = await rollupBuild.write({
-      dir: resolve(__dirname, "../dist"),
-      format: "esm",
-    });
+    const rollupOutput = await Promise.all([
+      rollupBuild.write({
+        dir: resolve(__dirname, "../dist"),
+        format: "esm",
+      }),
+      rollupBuild.write({
+        file: resolve(__dirname, "../dist/main.cjs"),
+        format: "cjs",
+      }),
+    ]);
     console.log("data", rollupOutput);
   } catch (err) {
     console.error(err);
