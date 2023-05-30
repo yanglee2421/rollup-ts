@@ -10,26 +10,18 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+const extensions = [".js", ".ts", ".cjs", ".mjs"];
 
 export default defineConfig({
   input: [resolve(__dirname, "../src/main.ts")],
-  output: [
-    {
-      format: "esm",
-      dir: "dist",
-      compact: true,
-    },
-  ],
   external: [/node_modules/],
   plugins: [
-    node({ extensions: [".js", ".ts"] }),
+    node({ extensions }),
     babel({
+      extensions,
       presets: ["@babel/preset-env", "@babel/preset-typescript"],
+      targets: { node: "current" },
       exclude: "node_modules/**",
-      extensions: [".js", ".ts"],
-      targets: {
-        node: "current",
-      },
     }),
     alias({
       entries: {
