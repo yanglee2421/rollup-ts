@@ -7,8 +7,11 @@ router.get("/api/hello", async (ctx, next) => {
   await next();
 
   console.log("params", ctx.params);
-  console.log("body", ctx.request.body);
 
   ctx.body = { name: "yang" };
   console.log("router", Name);
+});
+router.post("/api/hello", async (ctx, next) => {
+  await next();
+  console.log("body", ctx.request.body);
 });
