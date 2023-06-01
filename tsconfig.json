@@ -1,7 +1,14 @@
 {
   "include": ["src"],
   "compilerOptions": {
-    "types": ["node", "express", "babel__core"],
+    "types": [
+      "node",
+      "koa",
+      "koa__router",
+      "koa-bodyparser",
+      "koa-static",
+      "babel__core"
+    ],
     "baseUrl": ".",
     "paths": { "@/*": ["src/*"] },
 

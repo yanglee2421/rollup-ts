@@ -1,3 +1,5 @@
+export { router } from "./router-hello";
+
 export enum Items {
   first = "first",
 }
