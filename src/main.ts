@@ -6,6 +6,7 @@ import bodyParser from "koa-bodyparser";
 import serve from "koa-static";
 import { router } from "@/routers";
 import { log } from "@/middleware";
+import cors from "@koa/cors";
 
 // Path
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -17,6 +18,14 @@ const app = new Koa();
 
 // App middleware
 app.use(bodyParser());
+app.use(
+  cors({
+    origin(ctx) {
+      return ctx.origin;
+      return "";
+    },
+  })
+);
 app.use(serve(staticPath));
 app.use(router.routes());
 app.use(log);

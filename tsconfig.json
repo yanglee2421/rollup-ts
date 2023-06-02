@@ -3,11 +3,12 @@
   "compilerOptions": {
     "types": [
       "node",
+      "babel__core",
       "koa",
       "koa__router",
       "koa-bodyparser",
       "koa-static",
-      "babel__core"
+      "koa__cors"
     ],
     "baseUrl": ".",
     "paths": { "@/*": ["src/*"] },
