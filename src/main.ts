@@ -4,7 +4,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import bodyParser from "koa-bodyparser";
 import serve from "koa-static";
-import { router } from "@/routers";
+import { router, routerBing } from "@/routers";
 
 // Path
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -18,6 +18,7 @@ const app = new Koa();
 app.use(bodyParser());
 app.use(serve(staticPath));
 app.use(router.routes());
+app.use(routerBing.routes());
 app.use(async (ctx, next) => {
   await next();
   console.log("url", ctx.url);
