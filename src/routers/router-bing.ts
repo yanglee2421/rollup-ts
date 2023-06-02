@@ -7,6 +7,10 @@ bing.prefix("/bing");
 
 bing.get("/", async (ctx, next) => {
   await next();
-  const data = await get_bing();
+  const { idx = 0, n = 1 } = ctx.query;
+  const data = await get_bing({
+    idx: Number(idx),
+    n: Number(n),
+  });
   ctx.body = data;
 });

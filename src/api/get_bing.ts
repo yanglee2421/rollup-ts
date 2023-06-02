@@ -2,8 +2,8 @@ import { request } from "./request";
 
 interface Req {
   format: "js" | "xml";
-  idx: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
-  n: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+  idx: number;
+  n: number;
 }
 
 export function get_bing(req?: Partial<Req>) {
