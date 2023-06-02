@@ -1,17 +1,21 @@
 import Router from "@koa/router";
 import { Name } from "@/routers";
 
-export const router = new Router();
+export const hello = new Router();
 
-router.get("/api/hello", async (ctx, next) => {
+hello.prefix("/hello");
+
+// Endpoints
+hello.get("/", async (ctx, next) => {
   await next();
-
-  console.log("params", ctx.params);
-
-  ctx.body = { name: "yang" };
-  console.log("router", Name);
+  ctx.body = ctx.query;
 });
-router.post("/api/hello", async (ctx, next) => {
+hello.get("/:id", async (ctx, next) => {
   await next();
-  console.log("body", ctx.request.body);
+  ctx.body = ctx.params;
+});
+hello.post("/", async (ctx, next) => {
+  await next();
+  console.log("namespace", Name);
+  ctx.body = ctx.request.body;
 });

@@ -4,7 +4,8 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import bodyParser from "koa-bodyparser";
 import serve from "koa-static";
-import { router, routerBing } from "@/routers";
+import { router } from "@/routers";
+import { log } from "@/middleware";
 
 // Path
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -18,11 +19,7 @@ const app = new Koa();
 app.use(bodyParser());
 app.use(serve(staticPath));
 app.use(router.routes());
-app.use(routerBing.routes());
-app.use(async (ctx, next) => {
-  await next();
-  console.log("url", ctx.url);
-});
+app.use(log);
 
 // Handle error
 app.on("error", (err) => {
@@ -33,5 +30,5 @@ app.on("error", (err) => {
 // Listence port
 app.listen(port, () => {
   console.log(`stand by ${port}`);
-  console.log(Items);
+  console.log("enum", Items);
 });
