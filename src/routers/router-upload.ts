@@ -5,14 +5,11 @@ import formidable, { Fields, Files } from "formidable";
 
 // NodeJs Imports
 import { readFile, writeFile } from "node:fs/promises";
-import type { IncomingMessage } from "node:http";
+import { IncomingMessage } from "node:http";
 import { resolve } from "node:path";
 
 // ** Router
 export const upload = new Router({ prefix: "/upload" });
-
-// ** Form
-const form = formidable({ maxFields: 1, maxFiles: 1 });
 
 // ** Endpoints
 upload.post("/base64", async (ctx, next) => {
@@ -28,11 +25,6 @@ upload.post("/base64", async (ctx, next) => {
 
   ctx.body = { fields, data };
 });
-
-interface Data {
-  fields: Fields;
-  files: Files;
-}
 
 upload.post("/save", async (ctx, next) => {
   await next();
@@ -51,10 +43,17 @@ upload.post("/save", async (ctx, next) => {
 
 // Parse Form
 function toParse(req: IncomingMessage) {
+  // ** Form
+  const form = formidable({ maxFields: 1, maxFiles: 1 });
+
   return new Promise<Data>((res, rej) => {
     form.parse(req, (err, fields, files) => {
       if (err) return rej(err);
       return res({ fields, files });
     });
   });
+}
+interface Data {
+  fields: Fields;
+  files: Files;
 }
