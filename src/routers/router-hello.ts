@@ -9,6 +9,10 @@ hello.prefix("/hello");
 hello.get("/", async (ctx, next) => {
   await next();
   ctx.body = ctx.query;
+
+  // NOTE: ctx.req is NOT a alias for ctx.request
+  console.log(ctx.req);
+  console.log(ctx.request);
 });
 hello.get("/:id", async (ctx, next) => {
   await next();
