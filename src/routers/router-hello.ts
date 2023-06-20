@@ -1,11 +1,13 @@
 import Router from "@koa/router";
 import { Name } from "@/routers";
 
+// ** Router
 export const hello = new Router();
 
+// ** Configure
 hello.prefix("/hello");
 
-// Endpoints
+// ** Endpoints
 hello.get("/", async (ctx, next) => {
   await next();
   ctx.body = ctx.query;

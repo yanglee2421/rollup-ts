@@ -1,22 +1,23 @@
+// Koa Imports
 import Koa from "koa";
-import { Items } from "@/routers";
-import { dirname, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import cors from "@koa/cors";
 import bodyParser from "koa-bodyparser";
 import serve from "koa-static";
-import { router } from "@/routers";
+
+// Router Imports
+import { Items, router } from "@/routers";
+
+// Middleware Imports
 import { log } from "@/middleware";
-import cors from "@koa/cors";
 
-// Path
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const staticPath = resolve(__dirname, "../public");
+// NodeJs Imports
+import { resolve } from "node:path";
 
-// Server
+// ** Server
 const port = 3001;
 const app = new Koa();
 
-// App middleware
+// ** Middleware
 app.use(bodyParser());
 app.use(
   cors({
@@ -26,11 +27,19 @@ app.use(
     },
   })
 );
-app.use(serve(staticPath));
+
+// ** API
 app.use(router.routes());
+
+// ** Static
+const rootDir = process.cwd();
+const staticPath = resolve(rootDir, "./public");
+app.use(serve(staticPath));
+
+// ** Log
 app.use(log);
 
-// Handle error
+// ** Error
 app.on("error", (err) => {
   err.expose = true;
   console.log(err);

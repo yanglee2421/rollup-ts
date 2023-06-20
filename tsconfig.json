@@ -1,15 +1,6 @@
 {
   "include": ["src"],
   "compilerOptions": {
-    "types": [
-      "node",
-      "babel__core",
-      "koa",
-      "koa__router",
-      "koa-bodyparser",
-      "koa-static",
-      "koa__cors"
-    ],
     "baseUrl": ".",
     "paths": { "@/*": ["src/*"] },
 
