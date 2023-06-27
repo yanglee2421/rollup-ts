@@ -1,11 +1,10 @@
+// Rollup Imports
 import { defineConfig } from "rollup";
-
-// Rollup plugins
 import node from "@rollup/plugin-node-resolve";
 import babel from "@rollup/plugin-babel";
 import alias from "@rollup/plugin-alias";
 
-// NodeJs
+// NodeJs Imports
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
