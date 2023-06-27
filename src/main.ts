@@ -5,7 +5,7 @@ import bodyParser from "koa-bodyparser";
 import serve from "koa-static";
 
 // Router Imports
-import { Items, router } from "@/routers";
+import { router } from "@/routers";
 
 // Middleware Imports
 import { log } from "@/middleware";
@@ -48,5 +48,4 @@ app.on("error", (err) => {
 // Listence port
 app.listen(port, () => {
   console.log(`stand by ${port}`);
-  console.log("enum", Items);
 });

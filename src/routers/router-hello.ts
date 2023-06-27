@@ -1,5 +1,5 @@
+// Router Imports
 import Router from "@koa/router";
-import { Name } from "@/routers";
 
 // ** Router
 export const hello = new Router();
@@ -22,6 +22,5 @@ hello.get("/:id", async (ctx, next) => {
 });
 hello.post("/", async (ctx, next) => {
   await next();
-  console.log("namespace", Name);
   ctx.body = ctx.request.body;
 });
