@@ -8,7 +8,7 @@ import serve from "koa-static";
 import { router } from "@/routers";
 
 // Middleware Imports
-import { log } from "@/middleware";
+import { errorHandler, log } from "@/middleware";
 
 // NodeJs Imports
 import { resolve } from "node:path";
@@ -16,8 +16,15 @@ import { resolve } from "node:path";
 // ** Server
 const port = 3001;
 const app = new Koa();
+app.listen(port, () => {
+  console.log(`stand by ${port}`);
+});
+
+// ** Error
+app.use(errorHandler);
 
 // ** Middleware
+app.use(log);
 app.use(bodyParser());
 app.use(
   cors({
@@ -28,24 +35,10 @@ app.use(
   })
 );
 
-// ** API
+// ** Endpoints
 app.use(router.routes());
 
 // ** Static
 const rootDir = process.cwd();
 const staticPath = resolve(rootDir, "./public");
 app.use(serve(staticPath));
-
-// ** Log
-app.use(log);
-
-// ** Error
-app.on("error", (err) => {
-  err.expose = true;
-  console.log(err);
-});
-
-// Listence port
-app.listen(port, () => {
-  console.log(`stand by ${port}`);
-});
