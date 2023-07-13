@@ -21,7 +21,7 @@ app.listen(port, () => {
 });
 
 // ** Error
-app.use(errorHandler);
+app.use(errorHandler());
 
 // ** Middleware
 app.use(log);
